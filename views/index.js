@@ -23,7 +23,13 @@ app.use(bodyParser.json());
 
 //rotas
 app.get('/',(req, res) => {
-  res.render('index');
+  //metodo equivalente ao "SELECT"
+  Pergunta.findAll({ raw: true}).then(perguntas =>{
+    //armazenando as perguntas em uma variavel para exibir no front
+    res.render('index',{
+      perguntas: perguntas
+    });
+  });
 });
 
 app.get('/perguntar',(req, res) => {
